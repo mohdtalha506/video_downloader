@@ -48,7 +48,7 @@ export interface DownloadOptions {
 // };
 export const getYouTubeVideoInfo = async (url: string): Promise<VideoInfo> => {
   try {
-    const apiUrl = `http://localhost:5000/api/info/youtube?url=${encodeURIComponent(url)}`;
+    const apiUrl = import.meta.env.VITE_APP_BASEURL+`/api/info/youtube?url=${encodeURIComponent(url)}`;
     const response = await fetch(apiUrl);
     
     if (!response.ok) throw new Error('Failed to fetch video info');
@@ -242,7 +242,7 @@ const downloadGenericVideo = async (
   onProgress?: (progress: number) => void
 ): Promise<void> => {
   try {
-    const apiUrl = `http://localhost:5000/api/download?url=${encodeURIComponent(videoInfo.url)}&format=${options.format}&quality=${options.quality}`;
+    const apiUrl = import.meta.env.VITE_APP_BASEURL+`/api/download?url=${encodeURIComponent(videoInfo.url)}&format=${options.format}&quality=${options.quality}`;
     
     const anchor = document.createElement('a');
     anchor.href = apiUrl;
